@@ -1,0 +1,72 @@
+server:
+  port: 8088
+  ssl:
+    enabled: false
+    key-store: classpath:ssl/miip_keystore.pkcs12
+    key-store-password: miipmiip
+    key-store-type: PKCS12
+    key-password: miipmiip
+    key-alias: miip
+    trust-store: classpath:ssl/miip_trust_store.ts
+    trust-store-password: miipmiip
+    key-store-dat: classpath:ssl/miip_keystore.dat
+
+gracefulShutdown:
+  awaitTerminateTime: 180
+
+
+spring:
+  # Config 서버 설정
+  cloud:
+    config:
+      uri: http://localhost:10001
+  servlet:
+    multipart:
+      enabled: true
+      # Threshold after which files are written to disk.
+      file-size-threshold: 2KB
+      # Max file size.
+      max-file-size: 200MB
+      # Max Request Size
+      max-request-size: 215MB
+
+
+# BRS와 같이 가야함
+thread:
+  queue:
+    readcount: 2
+  pool:
+    mincount: 5
+    maxcount: 10
+  log:
+    enable: true
+
+
+#유레카 서버로 하면 되고, 이중화 IP로 설정 가능
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10002/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+
+##### Solace Config
+solace:
+  java:
+    host: "52.79.64.176:55555"
+    msg-vpn: MES
+    client-username: default
+    client-password: admin
+    reconnect-retries: 5
+    client-name: OIA-dev-1
+    connect-retries-per-host: 5
+    module-name: Q_DEV_OIAG_CMN_REPLY
+
+oia:
+  reply:
+    queue-name: Q_DEV_OIAG_CMN_REPLY

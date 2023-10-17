@@ -1,4 +1,4 @@
-package com.abs.cmn.oia;
+package com.tsh.dk.cmn.oia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

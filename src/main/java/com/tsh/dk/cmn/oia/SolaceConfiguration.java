@@ -1,4 +1,4 @@
-package com.abs.cmn.oia;
+package com.tsh.dk.cmn.oia;
 
 import com.solacesystems.jcsmp.DeliveryMode;
 import com.solacesystems.jcsmp.EndpointProperties;

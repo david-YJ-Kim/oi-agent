@@ -1,10 +1,9 @@
-package com.abs.cmn.oia.rest;
+package com.tsh.dk.cmn.oia.rest;
 
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.web.PagedResourcesAssembler;
-import com.abs.cmn.oia.solace.SolaceRequester;
-import com.solacesystems.jcsmp.JCSMPException;
+import com.tsh.dk.cmn.oia.solace.SolaceRequester;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;

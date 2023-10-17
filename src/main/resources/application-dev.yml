@@ -1,0 +1,29 @@
+server:
+  shutdown: graceful
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  tomcat:
+    threads:
+      max: 300
+      min-spare: 50
+    accept-count: 200
+
+logging:
+  level:
+    '[org.springframework]': debug
+    '[org.springframework.web]': debug
+
+solace:
+  java:
+    host: 52.79.64.176:55555
+    msg-vpn: MES-LOCAL
+    client-username: default
+    client-password: admin
+    client-name: OI-Agent-Test
+    reconnnect-retries: 5
+    retries-per-host: 5
+    requestor-timeout: 10000
+    module-name: Q_DEV_OIAG_CMN_REPLY
+
+application:
+  err-reply: {"retCode":"Fail","retMessage":"Time Out~~~~~"}

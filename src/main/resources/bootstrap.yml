@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: mes-oia
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,prometheus,info,health,metrics,shutdown,pause,resume,eurekadown
+  endpoint:
+    restart:
+      enabled: true
+    shutdown:
+      enabled: true
+#Config Server
+---
+spring:
+  profiles: local,server
+  cloud:
+    config:
+      uri: http://localhost:10001
+
+---
+spring:
+  profiles: product
+  cloud:
+    config:
+      uri: http://localhost:10001
+
+---
+spring:
+  profiles: cloud
+  cloud:
+    config:
+      uri: http://config:10001

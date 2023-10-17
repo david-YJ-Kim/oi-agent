@@ -1,4 +1,4 @@
-package com.abs.cmn.oia.util;
+package com.tsh.dk.cmn.oia.util;
 
 import org.springframework.beans.factory.annotation.Value;
 

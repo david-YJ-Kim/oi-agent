@@ -1,12 +1,10 @@
-package com.abs.cmn.oia.solace;
+package com.tsh.dk.cmn.oia.solace;
 
-import com.abs.cmn.oia.SolaceConfiguration;
-import com.abs.cmn.oia.util.OiaCommonCode;
-import com.abs.cmn.oia.util.SequenceManageUtil;
+import com.tsh.dk.cmn.oia.SolaceConfiguration;
+import com.tsh.dk.cmn.oia.util.OiaCommonCode;
+import com.tsh.dk.cmn.oia.util.SequenceManageUtil;
 import com.solacesystems.jcsmp.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
