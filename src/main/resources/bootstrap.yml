@@ -1,37 +1,86 @@
-spring:
-  application:
-    name: mes-oia
-
-
+server:
+  port: 8088
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh,prometheus,info,health,metrics,shutdown,pause,resume,eurekadown
+        include: "*"
   endpoint:
-    restart:
-      enabled: true
     shutdown:
       enabled: true
-#Config Server
----
-spring:
-  profiles: local,server
-  cloud:
-    config:
-      uri: http://localhost:10001
 
----
-spring:
-  profiles: product
-  cloud:
-    config:
-      uri: http://localhost:10001
 
----
 spring:
-  profiles: cloud
+  sleuth.log.slf4j.enabled: true
   cloud:
     config:
-      uri: http://config:10001
+      uri: http://192.168.30.5:10001
+  servlet:
+    multipart:
+      enabled: true
+      # Threshold after which files are written to disk.
+      file-size-threshold: 2KB
+      # Max file size.
+      max-file-size: 200MB
+      # Max Request Size
+      max-request-size: 215MB
+
+
+# BRS? ?? ???
+thread:
+  queue:
+    readcount: 2
+  pool:
+    mincount: 5
+    maxcount: 10
+  log:
+    enable: true
+
+
+#??? ??? ?? ??, ??? IP? ?? ??
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.30.5:10002/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+
+
+##### Application Config ####
+ap:
+  info:
+    group: OIA
+    site: SVM
+    env: DEV
+    sequence: 1
+  timeout-ms:
+    request: 60000
+    shutdown: 10000
+  interface:
+    solace:
+      host: localhost:55555
+      vpn: MES
+      client:
+        username: default
+        password: admin
+      connect:
+        trial-count: 2
+      reconnect:
+        trial-count: 20
+        per-host: 5
+    destination:
+      receive:
+        queue: SVM_DEV_OAG_RPL
+      test:
+        send:
+          topic: SVM/DEV/BRS/CMN/01
+  sequence:
+    file:
+      path: /home/ab_messerv/data/ifacts/utils/
+      name: SequenceRule.json
+

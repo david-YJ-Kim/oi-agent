@@ -1,0 +1,23 @@
+java -jar -Dspring.profiles.active=product1 ../target/oia-0.0.1-SNAPSHOT.jar
+
+
+profile = product1
+
+#!/bin/bash
+# 프로파일 변수로 할당
+profile=$1
+
+# 프로세스 명을 명시한다.
+readonly PROC_NAME="mes-oia-$profile"
+# jar 파일
+readonly DAEMON="../target/oia-0.0.1-SNAPSHOT.jar"
+# 프로세스 아이디가 존재할 패스를 설정
+readonly PID_PATH="./"
+readonly PROC_PID="${PID_PATH}${PROC_NAME}.pid"
+
+echo "nohup java -jar -Dspring.profiles.active=$profile -Dname=${PROC_NAME} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./ -Xms512m -Xmx1024m -XX:MaxMetaspaceSize=256m -XX:MetaspaceSize=128m -XX:+UseG1GC "${DAEMON}" > /dev/null 2>&1 &"
+nohup java -jar -Dspring.profiles.active=$profile -Dname=${PROC_NAME} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./ -Xms512m -Xmx1024m -XX:MaxMetaspaceSize=256m -XX:MetaspaceSize=128m -XX:+UseG1GC "${DAEMON}" > /dev/null 2>&1 &
+local PID=${!}
+echo " - Starting..."
+echo " - Created Process ID in ${PROC_PID}"
+echo ${PID} > ${PROC_PID}

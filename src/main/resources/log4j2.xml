@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <RollingFile name="LogApp" fileName="../logs/oia/cmn-oia.log" filePattern="../logs/oia/cmn-oia-%d{yyyy-MM-dd_HH}_%i.log" immediateFlush="true" append="true">
+            <!-- <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread][TraceID:%X{X-B3-TraceId},SpanID:%X{X-B3-SpanId}] %logger.%M(:%L) - %msg%n"/> -->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread][TraceID:%equals{%X{TraceID}}{}{startup}] %logger.%M(:%L) - %msg%n"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="4 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="500"/>
+        </RollingFile>
+
+        <RollingFile name="LogException" fileName="../logs/error/oia/cmn-oia_error.log" filePattern="../logs/error/oia/cmn-oia_error-%d{yyyy-MM-dd_HH}_%i.log" immediateFlush="true" append="true">
+            <!-- <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread] %logger.%M(:%L) - %msg%n"/> -->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread][TraceID:%equals{%X{TraceID}}{}{startup}] %logger.%M(:%L) - %msg%n"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="4 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="500"/>
+        </RollingFile>
+
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <!-- <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread][TraceID:%X{X-B3-TraceId},SpanID:%X{X-B3-SpanId}] %logger.%M(:%L) - %msg%n"/> -->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level [%thread][TraceID:%equals{%X{TraceID}}{}{startup}] %logger.%M(:%L) - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.abs.cmn.oia" additivity="false">
+            <AppenderRef ref="LogApp" level="debug" />
+            <AppenderRef ref="LogToConsole" level="info" />
+            <AppenderRef ref="LogException" level="error"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="LogApp"/>
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogException" level="error"/>
+        </Root>
+    </Loggers>
+</Configuration>

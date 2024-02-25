@@ -1,0 +1,26 @@
+### Send POST request with json body
+POST https://localhost:8088/oia/BRS_LOT_QTIME_CLEAR
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+
+
+### Send POST request with json body
+POST http://localhost:8088/test
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+
+### Shutdown
+POST http://localhost:8088/actuator/shutdown
+
+
+<> 2023-11-08T165925.200.txt

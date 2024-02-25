@@ -1,4 +1,4 @@
-package com.tsh.dk.cmn.oia.util;
+package com.abs.cmn.oia.util;
 
 import java.util.UUID;
 

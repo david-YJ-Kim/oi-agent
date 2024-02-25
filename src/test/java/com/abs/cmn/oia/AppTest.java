@@ -1,4 +1,4 @@
-package com.tsh.dk.cmn.oia;
+package com.abs.cmn.oia;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
